@@ -37,7 +37,8 @@ while True:
             enemy_x = package['x']
             enemy_y = package['y']
         elif package['type'] == 'shoot':
-            把對方的子彈加進 bullets 陣列裡...
+            # 把對方的子彈加進 bullets 陣列裡...
+            bullets.append({'x': package['x'], 'y': package['y'], 'dir': -10, 'owner': 'enemy'})
         elif package['type'] == 'hit':
             更新對方的血量數字...
     except BlockingIOError:
