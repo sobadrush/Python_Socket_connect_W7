@@ -61,8 +61,9 @@ while True:
             bullets.append(new_bullet)
 
             # ==== 【TODO 3】通知對方我開槍了 ====
-            # shoot_package = {'type': 'shoot', 'x': my_x, 'y': my_y}
+            shoot_package = {'type': 'shoot', 'x': my_x, 'y': my_y}
             # 將這個 package 用 dumps 打包並送出
+            sock.sendto(json.dumps(shoot_package).encode(), (TARGET_IP, 5001))
 
     # 控制移動
     keys = pygame.key.get_pressed()
