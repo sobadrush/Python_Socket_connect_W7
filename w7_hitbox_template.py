@@ -91,10 +91,14 @@ while True:
 
         # ==== 【TODO 4: P2P 碰撞判定】 ====
         # 若這是一顆「對方」射過來的子彈，且「打中我了」
-        # if b['owner'] == 'enemy' and my_rect.colliderect(bullet_rect):
-        #      1. my_hp -= 1
-        #      2. bullets.remove(b)
-        #      3. 傳送 {'type': 'hit', 'hp': my_hp} 告訴對方我受傷了
+        if b['owner'] == 'enemy' and my_rect.colliderect(bullet_rect):
+            # 1. my_hp -= 1
+            # 2. bullets.remove(b)
+            # 3. 傳送 {'type': 'hit', 'hp': my_hp} 告訴對方我受傷了
+            my_hp -= 1
+            bullets.remove(b)
+            hit_package = {'type': 'hit', 'hp': my_hp}
+            sock.sendto(json.dumps(hit_package).encode(), (TARGET_IP, 5001))
 
         # 飛出邊界則刪除
         if b['x'] < 0 or b['x'] > 800:
