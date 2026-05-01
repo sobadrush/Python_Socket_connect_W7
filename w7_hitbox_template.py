@@ -97,7 +97,7 @@ while True:
             # 3. 傳送 {'type': 'hit', 'hp': my_hp} 告訴對方我受傷了
             my_hp -= 1
             bullets.remove(b)
-            hit_package = {'type': 'hit', 'hp': my_hp}
+            hit_package = { 'type': 'hit', 'hp': my_hp }
             sock.sendto(json.dumps(hit_package).encode(), (TARGET_IP, 5001))
 
         # 飛出邊界則刪除
@@ -110,3 +110,5 @@ while True:
 
     # ==== 【TODO 5】傳送座標 ====
     # 每回合結束，把自己的新座標透過封包 {'type': 'pos', 'x': xxx, 'y': xxx} 送過去
+    pos_package = {'type': 'pos', 'x': my_x, 'y': my_y}
+    sock.sendto(json.dumps(pos_package).encode(), (TARGET_IP, 5001))
