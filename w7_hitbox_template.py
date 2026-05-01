@@ -43,6 +43,11 @@ while True:
         elif package['type'] == 'hit':
             # 更新對方的血量數字...
             enemy_hp = package['hp']
+    except (BlockingIOError, ConnectionResetError):
+        # 非阻塞模式下，Linux 拋 BlockingIOError，Windows 拋 ConnectionResetError
+        pass
+    except json.JSONDecodeError:
+        # 防止有人亂傳不是 JSON 格式的垃圾訊息導致閃退
         pass
 
     for event in pygame.event.get():
