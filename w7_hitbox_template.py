@@ -8,6 +8,8 @@ pygame.init()
 screen = pygame.display.set_mode((800, 600))
 pygame.display.set_caption("Week 7 - 碰撞判定與血條爭奪戰")
 clock = pygame.time.Clock()
+# 使用支援中文的系统字体
+font = pygame.font.SysFont("microsoftyaheiui", 28)  # Windows 微軟雅黑
 
 my_x, my_y = 100, 300
 enemy_x, enemy_y = 600, 300  # 對方的初始座標
@@ -104,6 +106,12 @@ while True:
         if b['x'] < 0 or b['x'] > 800:
             if b in bullets:
                 bullets.remove(b)
+
+    # ==== 顯示 HP ====
+    my_hp_text = font.render(f"玩家HP: {my_hp}", True, (59, 130, 246))
+    enemy_hp_text = font.render(f"敵人HP: {enemy_hp}", True, (239, 68, 68))
+    screen.blit(my_hp_text, (20, 20))
+    screen.blit(enemy_hp_text, (650, 20))
 
     pygame.display.flip()
     clock.tick(60)
