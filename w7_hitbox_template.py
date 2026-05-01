@@ -12,6 +12,7 @@ clock = pygame.time.Clock()
 my_x, my_y = 100, 300
 enemy_x, enemy_y = 600, 300  # 對方的初始座標
 my_hp = 10
+enemy_hp = 10
 
 bullets = []  # 儲存畫面上所有的子彈
 
@@ -40,8 +41,8 @@ while True:
             # 把對方的子彈加進 bullets 陣列裡...
             bullets.append({'x': package['x'], 'y': package['y'], 'dir': -10, 'owner': 'enemy'})
         elif package['type'] == 'hit':
-            更新對方的血量數字...
-    except BlockingIOError:
+            # 更新對方的血量數字...
+            enemy_hp = package['hp']
         pass
 
     for event in pygame.event.get():
